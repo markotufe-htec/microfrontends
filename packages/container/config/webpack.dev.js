@@ -1,6 +1,5 @@
 //merguje webpack common i webpack dev
 const { merge } = require("webpack-merge");
-const HtmlWebpackPlugin = require("html-webpack-plugin"); //uzima html fajl i dodaje script tagove u njega
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const commonConfig = require("./webpack.common");
 const packageJson = require("../package.json"); //uzimamo package.json
@@ -21,9 +20,6 @@ const devConfig = {
       },
       // shared: ["react", "react-dom"] //ucitavamo samo jednu kopiju react-a
       shared: packageJson.dependencies //dajemo webpacku da automatski kontrolise koje dependencie sharujemo
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html"
     })
   ]
 };
