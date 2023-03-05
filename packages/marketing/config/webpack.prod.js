@@ -6,7 +6,8 @@ const packageJson = require("../package.json");
 const prodConfig = {
   mode: "production", //javascript fajlovi su optimizovani, minified verziju dobijamo
   output: {
-    filename: "[name].[contenthash].js" //svi fajlovi koriste ovaj template kako bi imali odgovarajuci naziv (zbog caching issue se radi)
+    filename: "[name].[contenthash].js", //svi fajlovi koriste ovaj template kako bi imali odgovarajuci naziv (zbog caching issue se radi)
+    publicPath: "/marketing/latest/" //gde se nalazi remoteEntry.js
   },
   plugins: [
     new ModuleFederationPlugin({
