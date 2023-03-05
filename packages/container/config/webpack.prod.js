@@ -10,7 +10,7 @@ const prodConfig = {
   mode: "production", //javascript fajlovi su optimizovani, minified verziju dobijamo
   output: {
     filename: "[name].[contenthash].js", //svi fajlovi koriste ovaj template kako bi imali odgovarajuci naziv (zbog caching issue se radi)
-    publicPath: "/container/latest" //ovu opciju cemo imati kad god webpack zeli da se obrati fajlu koji je build-an od strane webpack-a. Npr. kada htmlplugin zeli da se obrati js fajlu koji je kreiran. Kada god zeli da se obrati tom js fajlu, koristice filename. Ali mozemo da konfigurisemo putanju do njega.
+    publicPath: "/container/latest/" //ovu opciju cemo imati kad god webpack zeli da se obrati fajlu koji je build-an od strane webpack-a. Npr. kada htmlplugin zeli da se obrati js fajlu koji je kreiran. Kada god zeli da se obrati tom js fajlu, koristice filename. Ali mozemo da konfigurisemo putanju do njega.
   },
   plugins: [
     new ModuleFederationPlugin({
