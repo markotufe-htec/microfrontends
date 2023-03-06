@@ -17,7 +17,8 @@ const prodConfig = {
       name: "container",
       remotes: {
         //gde da odemo da dobijemo source cod
-        marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`
+        marketing: `marketing@${domain}/marketing/latest/remoteEntry.js`,
+        auth: `auth@${domain}/auth/latest/remoteEntry.js`
       },
       shared: packageJson.dependencies
     })

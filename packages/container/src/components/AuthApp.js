@@ -1,21 +1,21 @@
 import React, { useRef, useEffect } from "react";
-import { mount as mountMarketing } from "marketing/MarketingApp";
+import { mount as mountAuth } from "auth/AuthApp";
 import { useHistory } from "react-router-dom";
 
-export default () => {
+export default ({ onSignIn }) => {
   //referenca za html elementa gde cemo renderovati mount aplikaciju
   const ref = useRef(null);
   //history objekat koji se trenutno koristi u containeru (kopija browser history)
   const history = useHistory();
 
-  //zelimo da pozovemo mount funkciju samo jednom, kada se marketing komponenta prvi put prikazala
+  //zelimo da pozovemo mount funkciju samo jednom, kada se app komponenta prvi put prikazala
   useEffect(() => {
-    const { onParentNavigate } = mountMarketing(ref.current, {
+    const { onParentNavigate } = mountAuth(ref.current, {
       initialPath: history.location.pathname,
-      //radimo rename (predstavlja path koji marketing aplikacija zeli da poseti)
+      //radimo rename (predstavlja path koji app aplikacija zeli da poseti)
       onNavigate: ({ pathname: nextPathname }) => {
-        //ovde cemo videti koji url marketing aplikacija posecuje i azuriracemo browser history
-        console.log("The container notice navigation in Marketing");
+        //ovde cemo videti koji url app aplikacija posecuje i azuriracemo browser history
+        console.log("The container notice navigation in App");
         console.log(nextPathname); //komunikacija iz memory history ka containeru
         //push funkcija kaze: hej history objektu, zelimo da odemo na odredjeni path
 
@@ -24,6 +24,10 @@ export default () => {
         if (pathname !== nextPathname) {
           history.push(nextPathname);
         }
+      },
+      onSignIn: () => {
+        console.log("User signed in");
+        onSignIn(); //setState kao props
       }
     });
 

@@ -4,7 +4,10 @@ import { createMemoryHistory, createBrowserHistory } from "history";
 import App from "./App";
 
 // Create Mount function to start up the app
-const mount = (htmlElement, { onNavigate, defaultHistory, initialPath }) => {
+const mount = (
+  htmlElement,
+  { onSignIn, onNavigate, defaultHistory, initialPath }
+) => {
   //zato sto cemo konfigurisati mnogo history objekat kako bismo syncovali (povezali trenutno stanje history objekat iz marketinga sa history objektom unutar container-a
   //ako smo dali defaultHistory u development modu i izolaciji, koristi, ako ne, koristi memoryHistory
   const history =
@@ -18,13 +21,14 @@ const mount = (htmlElement, { onNavigate, defaultHistory, initialPath }) => {
     history.listen(onNavigate);
   }
 
-  ReactDOM.render(<App history={history} />, htmlElement);
+  ReactDOM.render(<App onSignIn={onSignIn} history={history} />, htmlElement);
 
   return {
     //zato sto je onParentNavigate pozvana sa history.listen dobijamo location objekat
     onParentNavigate({ pathname: nextPathname }) {
       //poziva se kad god container uradi neku navigaciju
       console.log("Container just navigated");
+      console.log("auth app", nextPathname);
 
       const { pathname } = history.location; //trenutna putanja gde smo
       if (pathname !== nextPathname) {
@@ -36,7 +40,7 @@ const mount = (htmlElement, { onNavigate, defaultHistory, initialPath }) => {
 
 // If we are in development and in isolation, call mount immediately
 if (process.env.NODE_ENV === "development") {
-  const devRoot = document.querySelector("#_marketing-dev-root");
+  const devRoot = document.querySelector("#_app-dev-root");
 
   if (devRoot) {
     mount(devRoot, {
