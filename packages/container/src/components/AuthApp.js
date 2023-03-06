@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { mount as mountAuth } from "auth/AuthApp";
 import { useHistory } from "react-router-dom";
 
+//ovaj onSignIn smo prosledili iz App.js container aplikacije
 export default ({ onSignIn }) => {
   //referenca za html elementa gde cemo renderovati mount aplikaciju
   const ref = useRef(null);
